@@ -1,0 +1,38 @@
+strace       - System Call Interface
+ltrace       - System Libraries
+ss           - Sockets
+netstat      - Sockets, TCP/UDP, IP, Ethernet
+sysdig       - System Call Interface
+perf         - System Call Interface, System Libraries, Scheduler, CPU, I/O Bus, Applications, System Libraries, System Call Interface, VFS, File Systems, Volume Manager, Block Device Interface, Device Drivers
+sar          - Other
+/proc        - Other
+dstat        - Other
+dmesg        - Other
+mpstat       - Scheduler, CPU
+turbostat    - CPU
+rdmsr        - CPU
+tiptop       - CPU, Memory Bus, I/O Bus
+perf         - CPU, Memory Bus
+numastat     - DRAM
+ps           - CPU, Scheduler, Virtual Memory
+top          - CPU, Scheduler, Virtual Memory
+pidstat      - CPU, Scheduler, Virtual Memory, Block Device Interface
+free         - Virtual Memory, DRAM
+vmstat       - Virtual Memory, DRAM
+slabtop      - Virtual Memory, DRAM
+tcpdump      - Ethernet
+ip           - Network Controller, Port
+netstat      - Network Controller, Port
+nicstat      - Network Controller, Port
+lldptool     - Port
+snmpget      - Port
+ethtool      - Port
+iptraf       - TCP/UDP, IP, Ethernet, Port
+swapon       - Swap
+iotop        - Block Device Interface, I/O Controller, Disk
+iostat       - Block Device Interface, I/O Controller, Disk
+blktrace     - Block Device Interface, I/O Controller, Disk
+ftrace       - Applications, System Libraries, System Call Interface, VFS, File Systems, Volume Manager, Block Device Interface, Device Drivers
+stap         - Applications, System Libraries, System Call Interface, VFS, File Systems, Volume Manager, Block Device Interface, Device Drivers
+lttng        - Applications, System Libraries, System Call Interface, VFS, File Systems, Volume Manager, Block Device Interface, Device Drivers
+ebpf         - Applications, System Libraries, System Call Interface, VFS, File Systems, Volume Manager, Block Device Interface, Device Drivers
