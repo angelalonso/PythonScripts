@@ -1,42 +1,51 @@
 #/bin/env python
-#
-# Script to find and remove duplicated files
-# Based on http://pythoncentral.io/finding-duplicate-files-with-python/
+'''
+Script to find and remove duplicated files
+Based on http://pythoncentral.io/finding-duplicate-files-with-python/
+'''
 
 # Import everything needed
 import os
 import sys
 import hashlib
 
-def hashfile(path, blocksize = 65536):
+def hashfile(path, blocksize=65536):
+    '''
+    Returns hash of a given file
+    '''
     afile = open(path, 'rb')
     hasher = hashlib.md5()
     buf = afile.read(blocksize)
-    while len(buf) > 0:
+    while len(buf) > 0: #pylint: disable=C1801
         hasher.update(buf)
         buf = afile.read(blocksize)
     afile.close()
     return hasher.hexdigest()
 
-def findDup(parentFolder):
+def find_duplicate(parentfolder):
+    '''
+    Returns the duplicated files found in a given folder
+    '''
     # Dups in format {hash:[names]}
-    dups = {}
-    for dirName, subdirs, fileList in os.walk(parentFolder):
-        print('Scanning %s...' % dirName)
-        for filename in fileList:
+    duplicates = {}
+    for dirname, subdirs, filelist in os.walk(parentfolder):
+        print 'Scanning %s...' % dirname
+        for filename in filelist:
             # Get the path to the file
-            path = os.path.join(dirName, filename)
+            path = os.path.join(dirname, filename)
             # Calculate hash
             file_hash = hashfile(path)
             # Add or append the file path
-            if file_hash in dups:
-                dups[file_hash].append(path)
+            if file_hash in duplicates:
+                duplicates[file_hash].append(path)
             else:
-                dups[file_hash] = [path]
-    return dups
+                duplicates[file_hash] = [path]
+    return duplicates
 
-# Joins two dictionaries
-def joinDicts(dict1, dict2):
+def joindicts(dict1, dict2):
+    '''
+    Joins two dictionaries
+    '''
     for key in dict2.keys():
         if key in dict1:
             dict1[key] = dict1[key] + dict2[key]
@@ -45,19 +54,18 @@ def joinDicts(dict1, dict2):
 
 def printResults(dict1):
     results = list(filter(lambda x: len(x) > 1, dict1.values()))
-    if len(results) > 0:
-        print('Duplicates Found:')
-        print('The following files are identical. The name could differ, but the content is identical')
-        print('___________________')
+    if results:
+        print 'Duplicates Found:'
+        print '___________________'
         for result in results:
             for subresult in result:
-                print('\t\t%s' % subresult)
-            print('___________________')
+                print '\t\t%s' % subresult
+            print '___________________'
 
     else:
-        print('No duplicate files found.')
+        print 'No duplicate files found.'
 
-        
+
 if __name__ == '__main__':
     if len(sys.argv) > 1:
         dups = {}
@@ -66,9 +74,9 @@ if __name__ == '__main__':
             # Iterate the folders given
             if os.path.exists(i):
                 # Find the duplicated files and append them to the dups
-                joinDicts(dups, findDup(i))
+                joindicts(dups, find_duplicate(i))
             else:
-                print('%s is not a valid path, please verify' % i)
+                print '%s is not a valid path, please verify' % i
                 sys.exit()
         printResults(dups)
     else:
