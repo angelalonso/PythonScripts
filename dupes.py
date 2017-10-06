@@ -80,4 +80,4 @@ if __name__ == '__main__':
                 sys.exit()
         printResults(dups)
     else:
-        print('Usage: python dupFinder.py folder or python dupFinder.py folder1 folder2 folder3')
+        print 'Usage: python dupFinder.py folder or python dupFinder.py folder1 folder2 folder3'
