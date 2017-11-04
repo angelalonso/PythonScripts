@@ -28,18 +28,22 @@ def find_duplicate(parentfolder):
     '''
     # Dups in format {hash:[names]}
     duplicates = {}
-    for dirname, subdirs, filelist in os.walk(parentfolder):
+    for dirname, subdirs, filelist in os.walk(parentfolder): #pylint: disable=W0612
         print 'Scanning %s...' % dirname
         for filename in filelist:
             # Get the path to the file
             path = os.path.join(dirname, filename)
-            # Calculate hash
-            file_hash = hashfile(path)
-            # Add or append the file path
-            if file_hash in duplicates:
-                duplicates[file_hash].append(path)
+            # Check if the file is a symlink, and avoid it
+            if os.path.islink(path):
+                print 'file ' + path + 'is a symlink'
             else:
-                duplicates[file_hash] = [path]
+                # Calculate hash
+                file_hash = hashfile(path)
+                # Add or append the file path
+                if file_hash in duplicates:
+                    duplicates[file_hash].append(path)
+                else:
+                    duplicates[file_hash] = [path]
     return duplicates
 
 def joindicts(dict1, dict2):
@@ -52,7 +56,10 @@ def joindicts(dict1, dict2):
         else:
             dict1[key] = dict2[key]
 
-def printResults(dict1):
+def print_results(dict1):
+    '''
+    Prints the duplicated files, grouped
+    '''
     results = list(filter(lambda x: len(x) > 1, dict1.values()))
     if results:
         print 'Duplicates Found:'
@@ -78,6 +85,6 @@ if __name__ == '__main__':
             else:
                 print '%s is not a valid path, please verify' % i
                 sys.exit()
-        printResults(dups)
+        print_results(dups)
     else:
         print 'Usage: python dupFinder.py folder or python dupFinder.py folder1 folder2 folder3'
