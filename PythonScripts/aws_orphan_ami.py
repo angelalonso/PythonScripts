@@ -1,3 +1,4 @@
+# TODO: merge this and aws_old_amis.py
 import boto
 import boto3
 import datetime
