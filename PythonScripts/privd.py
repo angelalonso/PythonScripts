@@ -2,8 +2,22 @@ import os
 import subprocess
 import glob
 
+# The folder where you store your keys for this password
+# TODO: remove .sysangel
+FOLDRKEYS = os.environ['HOME'] + "/.privd"
+
 def mount_all(cryfs_map):
-    pass
+    # Get your password
+    (pass_encfs, pass_err) = bash('/usr/bin/openssl rsautl -inkey ' + FOLDRKEYS + '/priv.key -decrypt < ' + FOLDRKEYS + '/cryfs.pass')
+
+    for encrypted_folder in cryfs_map:
+        dec_folder = cryfs_map[encrypted_folder].replace('$HOME', os.environ['HOME'])
+
+        if not os.path.ismount(dec_folder):
+            enc_folder = encrypted_folder.replace('$HOME', os.environ['HOME'])
+            print(enc_folder)
+            print(dec_folder)
+            (mount_cryfs, mount_err) = bash('echo "' + pass_encfs + '" | cryfs ' + enc_folder + ' ' + dec_folder)
 
 def bash(command):
 
@@ -29,14 +43,12 @@ def test_mounts(cryfs_map):
     not_mounted = []
     wrong_mounted = []
 
+    mount_all(cryfs_map)
+
     # Get mounted volumes
     for encrypted_folder in cryfs_map:
         enc_folder = cryfs_map[encrypted_folder].replace('$HOME', os.environ['HOME'])
-
-        if not os.path.ismount(enc_folder):
-            not_mounted.append(enc_folder)
-        else:
-            error_files = check_files(enc_folder)
+        error_files = check_files(enc_folder)
 
     return "DONE"
 
