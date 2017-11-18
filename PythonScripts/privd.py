@@ -15,10 +15,12 @@ def bash(command):
 
 
 def checksum(folder):
-    result = [y for x in os.walk(folder) for y in glob.glob(os.path.join(x[0], '*'))]
-    for file in result:
-        if not os.path.isdir(file):
-            (result, error) = bash('md5sum ' + file)
+    for dirpath, dirnames, files in os.walk(folder):
+        for realname in files:
+            # some file names are conflictive
+            name = realname.replace(' ','\ ').replace('(', '\(').replace(')', '\)')
+            file_in = (os.path.join(dirpath, name))
+            (result, error) = bash('md5sum ' + file_in)
             if error: 
                 print(error)
     
