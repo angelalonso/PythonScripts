@@ -14,15 +14,15 @@ def bash(command):
     return build_cmd.communicate()
 
 
-def checksum(folder):
+def check_files(folder):
+    error_files = []
     for dirpath, dirnames, files in os.walk(folder):
-        for realname in files:
-            # some file names are conflictive
-            name = realname.replace(' ','\ ').replace('(', '\(').replace(')', '\)')
+        for name in files:
             file_in = (os.path.join(dirpath, name))
-            (result, error) = bash('md5sum ' + file_in)
-            if error: 
-                print(error)
+            if not os.path.isfile(file_in):
+                error_files.append(file_in)
+
+    return error_files
     
 
 def test_mounts(cryfs_map):
@@ -36,9 +36,7 @@ def test_mounts(cryfs_map):
         if not os.path.ismount(enc_folder):
             not_mounted.append(enc_folder)
         else:
-            checksum(enc_folder)
-
-    print(not_mounted)
+            error_files = check_files(enc_folder)
 
     return "DONE"
 
