@@ -1,6 +1,8 @@
 import os
+import sys
 import subprocess
 import glob
+import logging as log
 
 # TODO:
 #  - Sync .ssh, .aws, .kube?
@@ -67,4 +69,12 @@ def test_mounts(cryfs_map):
 if __name__ == "__main__":
     # TODO: Check you are on unix-like
     # TODO: Test on Macos
+    # TODO: use argparse https://docs.python.org/3/library/argparse.html
+    try: args = sys.argv[1]
+    except: args = ''
+    if args:
+        log.basicConfig(format="%(levelname)s: %(message)s", level=log.DEBUG)
+    else:
+        log.basicConfig(format="%(levelname)s: %(message)s", level=log.INFO)
     (not_mounted, wrong_files) = test_mounts(CRYFS_MAP)
+    log.debug(not_mounted)
