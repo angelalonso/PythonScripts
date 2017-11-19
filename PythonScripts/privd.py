@@ -69,6 +69,16 @@ def check_files(folder):
                 error_files.append(file_in)
 
     return error_files
+
+
+def correct_files(wrong_files):
+    # TODO:
+    # If main has any error
+    #   If bck is OK, remove main, copy bck to main (encrypted folder)
+    # If main is OK
+    #   If bck has any error, remove bck, copy main to bck (encrpted folder again)
+    #   If bck is OK, sync from main to bck
+    pass
     
 
 def test_mounts(cryfs_map):
@@ -113,9 +123,12 @@ if __name__ == "__main__":
     elif args['check']:
         wrong_files = test_mounts(CRYFS_MAP)
         print wrong_files
+        print('Trying to correct errors')
+        correct_files(wrong_files)
         # By Default, we mount everything and check it
     else:
         not_mounted = mount_all(CRYFS_MAP)
         wrong_files = test_mounts(CRYFS_MAP)
         log.debug(not_mounted)
+
         log.error(wrong_files)
