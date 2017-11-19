@@ -19,6 +19,7 @@ CRYFS_MAP = {
 
 
 def mount_all(cryfs_map):
+    log.debug("mounting all volumes")
     not_mounted = []
     # Get your password
     (pass_encfs, pass_err) = bash('/usr/bin/openssl rsautl -inkey ' + FOLDRKEYS + '/priv.key -decrypt < ' + FOLDRKEYS + '/cryfs.pass')
@@ -34,6 +35,7 @@ def mount_all(cryfs_map):
 
 
 def unmount_all(cryfs_map):
+    log.debug("unmounting all volumes")
     mounted = []
 
     for encrypted_folder in cryfs_map:
@@ -48,6 +50,7 @@ def unmount_all(cryfs_map):
 
 
 def bash(command):
+    log.debug("running " + command)
 
     build_cmd = subprocess.Popen([command], stdout=subprocess.PIPE, shell=True)
     #(out_getmounts, err_getmounts) = build_cmd.communicate()
@@ -57,6 +60,7 @@ def bash(command):
 
 
 def check_files(folder):
+    log.debug("checking files under folder " + folder)
     error_files = []
     for dirpath, dirnames, files in os.walk(folder):
         for name in files:
@@ -68,6 +72,7 @@ def check_files(folder):
     
 
 def test_mounts(cryfs_map):
+    log.debug("testing mounts")
     wrong_files = {}
 
     # Get mounted volumes
