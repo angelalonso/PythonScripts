@@ -15,10 +15,10 @@ FOLDRKEYS = os.environ['HOME'] + "/.privd"
 # The mapping of encrypted folders and mountpoints
 #            encrypted folder: mounted folder
 CRYFS_MAP = {
-            '$HOME/Dropbox/.enc_a': os.environ['HOME'] + '/Private',
+            os.environ['HOME'] + '/Dropbox/.enc_a': os.environ['HOME'] + '/Private',
 #            '$HOME/Dropbox/.enc_aa': os.environ['HOME'] + '/Private_b',
 #            '$HOME/Dropbox/.enc_bb': os.environ['HOME'] + '/.privd/Private.bck_b',
-            '$HOME/Dropbox/.enc_b': os.environ['HOME'] + '/.privd/Private.bck'
+            os.environ['HOME'] + '$HOME/Dropbox/.enc_b': os.environ['HOME'] + '/.privd/Private.bck'
 }
 
 
@@ -98,8 +98,9 @@ def correct_mounts(wrong_files):
 
     # TODO: actually do this:
     # TODO: also check we use the latest (if possible, please?)
+    print CRYFS_MAP.keys()[CRYFS_MAP.values().index(recovery_volumes[0])]
     print ('correctable')
-    print recovery_volumes
+    print recovery_volumes[0]
     print ('correct from:')
     print source_volumes[0]
     
