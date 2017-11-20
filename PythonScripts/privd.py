@@ -16,9 +16,9 @@ FOLDRKEYS = os.environ['HOME'] + "/.privd"
 #            encrypted folder: mounted folder
 CRYFS_MAP = {
             os.environ['HOME'] + '/Dropbox/.enc_a': os.environ['HOME'] + '/Private',
-#            '$HOME/Dropbox/.enc_aa': os.environ['HOME'] + '/Private_b',
-#            '$HOME/Dropbox/.enc_bb': os.environ['HOME'] + '/.privd/Private.bck_b',
-            os.environ['HOME'] + '$HOME/Dropbox/.enc_b': os.environ['HOME'] + '/.privd/Private.bck'
+            os.environ['HOME'] + '/Dropbox/.enc_aa': os.environ['HOME'] + '/Private_b',
+#            os.environ['HOME'] + '/Dropbox/.enc_bb': os.environ['HOME'] + '/.privd/Private.bck_b',
+            os.environ['HOME'] + '/Dropbox/.enc_b': os.environ['HOME'] + '/.privd/Private.bck'
 }
 
 
@@ -98,11 +98,12 @@ def correct_mounts(wrong_files):
 
     # TODO: actually do this:
     # TODO: also check we use the latest (if possible, please?)
-    print CRYFS_MAP.keys()[CRYFS_MAP.values().index(recovery_volumes[0])]
-    print ('correctable')
-    print recovery_volumes[0]
-    print ('correct from:')
-    print source_volumes[0]
+    for volume in recovery_volumes:
+        print ('correctable')
+        print CRYFS_MAP.keys()[CRYFS_MAP.values().index(volume)]
+        print ('correct from:')
+        print CRYFS_MAP.keys()[CRYFS_MAP.values().index(source_volumes[0])]
+        # bash cp -R or shutils??
     
 
 def test_mounts(cryfs_map):
