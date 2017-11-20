@@ -103,6 +103,7 @@ if __name__ == "__main__":
     parser.add_argument('-u', '--umount', help='Unmount all defined volumes', required=False, action='store_true')
     parser.add_argument('-c', '--check', help='Check integrity of all defined volumes', required=False, action='store_true')
     parser.add_argument('-v', '--verbose', help='Show higher level of verbosity', required=False, action='store_true')
+    # TODO: add an autopilot argument (-a?)
 
     args = vars(parser.parse_args())
 
@@ -127,8 +128,4 @@ if __name__ == "__main__":
         correct_files(wrong_files)
         # By Default, we mount everything and check it
     else:
-        not_mounted = mount_all(CRYFS_MAP)
-        wrong_files = test_mounts(CRYFS_MAP)
-        log.debug(not_mounted)
-
-        log.error(wrong_files)
+        parser.print_help()
