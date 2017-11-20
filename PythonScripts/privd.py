@@ -7,6 +7,8 @@ import sys
 
 # TODO:
 #  - Sync .ssh, .aws, .kube?
+# Check folders are there, create them otherwise
+# Check keys are there, create them otherwise
 
 # The folder where you store your keys for this password. TODO: remove .sysangel
 FOLDRKEYS = os.environ['HOME'] + "/.privd"
@@ -14,6 +16,8 @@ FOLDRKEYS = os.environ['HOME'] + "/.privd"
 #            encrypted folder: mounted folder
 CRYFS_MAP = {
             '$HOME/Dropbox/.enc_a': os.environ['HOME'] + '/Private',
+#            '$HOME/Dropbox/.enc_aa': os.environ['HOME'] + '/Private_b',
+#            '$HOME/Dropbox/.enc_bb': os.environ['HOME'] + '/.privd/Private.bck_b',
             '$HOME/Dropbox/.enc_b': os.environ['HOME'] + '/.privd/Private.bck'
 }
 
@@ -53,8 +57,8 @@ def bash(command):
     log.debug("running " + command)
 
     build_cmd = subprocess.Popen([command], stdout=subprocess.PIPE, shell=True)
-    #(out_getmounts, err_getmounts) = build_cmd.communicate()
     ## TODO: manage errors or send them
+    #(out_getmounts, err_getmounts) = build_cmd.communicate()
     #return out_getmounts
     return build_cmd.communicate()
 
@@ -71,14 +75,33 @@ def check_files(folder):
     return error_files
 
 
-def correct_files(wrong_files):
+def correct_mounts(wrong_files):
     # TODO:
     # If main has any error
     #   If bck is OK, remove main, copy bck to main (encrypted folder)
     # If main is OK
     #   If bck has any error, remove bck, copy main to bck (encrpted folder again)
     #   If bck is OK, sync from main to bck
-    pass
+    source_volumes = []
+    recovery_volumes = []
+    log.debug('Correcting mounts with file issues')
+    if all(len(value) == 0 for value in wrong_files.values()):
+        log.debug('all are good')
+    elif all(len(value) > 0 for value in wrong_files.values()):
+        log.error('we are screwed, please try to save manually whatever you can')
+    else:
+        for volume in wrong_files:
+            if len(wrong_files[volume]) == 0: 
+                source_volumes.append(volume)
+            else: 
+                recovery_volumes.append(volume)
+
+    # TODO: actually do this:
+    # TODO: also check we use the latest (if possible, please?)
+    print ('correctable')
+    print recovery_volumes
+    print ('correct from:')
+    print source_volumes[0]
     
 
 def test_mounts(cryfs_map):
@@ -94,16 +117,25 @@ def test_mounts(cryfs_map):
 
     return wrong_files
 
+
+def recover_mounts(cryfs_map):
+    pass
+
+
+def autopilot(cryfs_map):
+    pass
+
+
 if __name__ == "__main__":
     # TODO: Check you are on unix-like
-    # TODO: Test on Macos
     parser = argparse.ArgumentParser()
     # Verbosity
     parser.add_argument('-m', '--mount', help='Mount all defined volumes', required=False, action='store_true')
     parser.add_argument('-u', '--umount', help='Unmount all defined volumes', required=False, action='store_true')
-    parser.add_argument('-c', '--check', help='Check integrity of all defined volumes', required=False, action='store_true')
+    parser.add_argument('-r', '--recover', help='Check integrity of all defined volumes, and correct any errors', required=False, action='store_true')
+    parser.add_argument('-c', '--check', help='Only check integrity of all defined volumes', required=False, action='store_true')
+    parser.add_argument('-a', '--auto', help='Prepare folders and keys, mount all volumes, correct any errors', required=False, action='store_true')
     parser.add_argument('-v', '--verbose', help='Show higher level of verbosity', required=False, action='store_true')
-    # TODO: add an autopilot argument (-a?)
 
     args = vars(parser.parse_args())
 
@@ -121,11 +153,14 @@ if __name__ == "__main__":
     elif args['mount']:
         not_mounted = mount_all(CRYFS_MAP)
         log.debug(not_mounted)
+    elif args['recover']:
+        recover_mounts(CRYFS_MAP)
     elif args['check']:
         wrong_files = test_mounts(CRYFS_MAP)
         print wrong_files
         print('Trying to correct errors')
-        correct_files(wrong_files)
-        # By Default, we mount everything and check it
+        correct_mounts(wrong_files)
+    elif args['auto']:
+        autopilot(CRYFS_MAP)
     else:
         parser.print_help()
