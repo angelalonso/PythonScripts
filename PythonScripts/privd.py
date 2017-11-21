@@ -6,6 +6,11 @@ import subprocess
 import sys
 
 # TODO:
+# Build again using Objects
+# Check you are on unix-like
+# function to check newest file
+# Sync from the main, make user choose otherwise
+# Use a config file instead, give a template
 #  - Sync .ssh, .aws, .kube?
 # Check folders are there, create them otherwise
 # Check keys are there, create them otherwise
@@ -78,8 +83,6 @@ def check_files(folder):
 
 def recover_mounts(wrong_files):
     # TODO:
-    # If main has any error
-    #   If bck is OK, remove main, copy bck to main (encrypted folder)
     # If main is OK
     #   If bck has any error, remove bck, copy main to bck (encrpted folder again)
     #   If bck is OK, sync from main to bck
@@ -95,7 +98,6 @@ def recover_mounts(wrong_files):
         log.info('all volumes are good')
     else:
         log.info('Correcting mounts with file issues')
-        # TODO: also check we use the latest (if possible, please?)
         for volume in recovery_volumes:
             bash('rm -rf ' + CRYFS_MAP.keys()[CRYFS_MAP.values().index(volume)] + '; cp -R '
                     + CRYFS_MAP.keys()[CRYFS_MAP.values().index(source_volumes[0])] + ' '
@@ -124,7 +126,6 @@ def autopilot(cryfs_map):
 
 
 if __name__ == "__main__":
-    # TODO: Check you are on unix-like
     parser = argparse.ArgumentParser()
     # Verbosity
     parser.add_argument('-m', '--mount', help='Mount all defined volumes', required=False, action='store_true')
