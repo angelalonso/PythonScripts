@@ -6,6 +6,7 @@ import subprocess
 import sys
 
 # TODO:
+# Add check for volume itself -> see current aa
 # Build again using Objects
 # Check you are on unix-like
 # function to check newest file
