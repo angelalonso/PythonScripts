@@ -16,7 +16,8 @@ FOLDRKEYS = os.environ['HOME'] + "/.privd"
 #            encrypted folder: mounted folder
 CRYFS_MAP = {
             os.environ['HOME'] + '/Dropbox/.enc_a': os.environ['HOME'] + '/Private',
-            os.environ['HOME'] + '/Dropbox/.enc_aa': os.environ['HOME'] + '/Private_b',
+# Only here for testing
+#            os.environ['HOME'] + '/Dropbox/.enc_aa': os.environ['HOME'] + '/Private_b',
 #            os.environ['HOME'] + '/Dropbox/.enc_bb': os.environ['HOME'] + '/.privd/Private.bck_b',
             os.environ['HOME'] + '/Dropbox/.enc_b': os.environ['HOME'] + '/.privd/Private.bck'
 }
@@ -75,7 +76,7 @@ def check_files(folder):
     return error_files
 
 
-def correct_mounts(wrong_files):
+def recover_mounts(wrong_files):
     # TODO:
     # If main has any error
     #   If bck is OK, remove main, copy bck to main (encrypted folder)
@@ -84,26 +85,24 @@ def correct_mounts(wrong_files):
     #   If bck is OK, sync from main to bck
     source_volumes = []
     recovery_volumes = []
-    log.debug('Correcting mounts with file issues')
-    if all(len(value) == 0 for value in wrong_files.values()):
-        log.debug('all are good')
-    elif all(len(value) > 0 for value in wrong_files.values()):
-        log.error('we are screwed, please try to save manually whatever you can')
+    
+    for volume in wrong_files:
+        if len(wrong_files[volume]) == 0: 
+            source_volumes.append(volume)
+        else: 
+            recovery_volumes.append(volume)
+    if len(recovery_volumes) == 0:
+        log.info('all volumes are good')
     else:
-        for volume in wrong_files:
-            if len(wrong_files[volume]) == 0: 
-                source_volumes.append(volume)
-            else: 
-                recovery_volumes.append(volume)
-
-    # TODO: actually do this:
-    # TODO: also check we use the latest (if possible, please?)
-    for volume in recovery_volumes:
-        print ('correctable')
-        print CRYFS_MAP.keys()[CRYFS_MAP.values().index(volume)]
-        print ('correct from:')
-        print CRYFS_MAP.keys()[CRYFS_MAP.values().index(source_volumes[0])]
-        # bash cp -R or shutils??
+        log.info('Correcting mounts with file issues')
+        # TODO: also check we use the latest (if possible, please?)
+        for volume in recovery_volumes:
+            bash('rm -rf ' + CRYFS_MAP.keys()[CRYFS_MAP.values().index(volume)] + '; cp -R '
+                    + CRYFS_MAP.keys()[CRYFS_MAP.values().index(source_volumes[0])] + ' '
+                    + CRYFS_MAP.keys()[CRYFS_MAP.values().index(volume)])
+            print ('correcting ' + CRYFS_MAP.keys()[CRYFS_MAP.values().index(volume)])
+            print ('with ' + CRYFS_MAP.keys()[CRYFS_MAP.values().index(source_volumes[0])])
+            # bash cp -R or shutils??
     
 
 def test_mounts(cryfs_map):
@@ -118,10 +117,6 @@ def test_mounts(cryfs_map):
             wrong_files[dec_folder] = error_files
 
     return wrong_files
-
-
-def recover_mounts(cryfs_map):
-    pass
 
 
 def autopilot(cryfs_map):
@@ -144,7 +139,7 @@ if __name__ == "__main__":
     if args['verbose']:
         log.basicConfig(format="%(levelname)s: %(message)s", level=log.DEBUG)
     else:
-        log.basicConfig(format="%(levelname)s: %(message)s", level=log.ERROR)
+        log.basicConfig(format="%(levelname)s: %(message)s", level=log.INFO)
 
     if args['umount']:
         if args['mount']:
@@ -156,12 +151,14 @@ if __name__ == "__main__":
         not_mounted = mount_all(CRYFS_MAP)
         log.debug(not_mounted)
     elif args['recover']:
-        recover_mounts(CRYFS_MAP)
-    elif args['check']:
         wrong_files = test_mounts(CRYFS_MAP)
         print wrong_files
-        print('Trying to correct errors')
-        correct_mounts(wrong_files)
+        recover_mounts(wrong_files)
+    elif args['check']:
+        wrong_files = test_mounts(CRYFS_MAP)
+        # TODO: beautify this
+        log.error('Errors found:')
+        log.error(wrong_files)
     elif args['auto']:
         autopilot(CRYFS_MAP)
     else:
