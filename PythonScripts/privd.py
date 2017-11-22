@@ -6,8 +6,11 @@ import subprocess
 import sys
 
 # TODO:
+# solve this:
+### ERROR: Errors found:
+### ERROR: {'/Users/angel.fonseca/.privd/Private.bck': []}
 # Add check for volume itself -> see current aa
-# Build again using Objects
+# Build again using Objects, GPG encryption file by file
 # Check you are on unix-like
 # function to check newest file
 # Sync from the main, make user choose otherwise
