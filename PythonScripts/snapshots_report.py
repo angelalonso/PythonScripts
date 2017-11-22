@@ -41,7 +41,7 @@ def parse_description(description):
     return '', ''
 
 def main():
-    with open('raport.csv', 'w') as csvfile:
+    with open('snapshot_report.csv', 'w') as csvfile:
         writer = csv.writer(csvfile)
         writer.writerow([
             'snapshot id',
