@@ -1,0 +1,6 @@
+*.secret
+*.swp
+*.swo
+*.txt
+*.json
+*test*
