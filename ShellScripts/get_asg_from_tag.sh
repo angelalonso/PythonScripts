@@ -10,3 +10,4 @@ export AWS_PROFILE=$AWS_PROF
 #https://stackoverflow.com/questions/40027395/passing-bash-variable-to-jq-select
 #aws autoscaling describe-auto-scaling-groups | jq '.[][] | select (.Tags[].Value=="vendorbackend")' | jq .AutoScalingGroupName
 aws autoscaling describe-auto-scaling-groups | jq -r --arg FLEET "$FLEET" '.[][] | select (.Tags[].Value==$FLEET)' | jq .AutoScalingGroupName
+#aws autoscaling update-auto-scaling-group --auto-scaling-group-name $ASG --launch-configuration-name $LC
