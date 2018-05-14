@@ -9,7 +9,7 @@ KUBECFGFOLDR="$HOME/.kube"
 # - the same number of entries
 # - in the same order
 CLUSTERS=(QA3 STAGING PROD-ASIA PROD)
-CONFIGS=(config.qa.kops config.staging.kops config.prod.asia.kops config.prod.kops)
+CONFIGS=(config.qa.eu config.staging.eu config.prod.asia config.prod.eu)
 EXTRAS=('--namespace qa3' '' '' '')
 APPS=(lingo es-population swimlanes es-worker sapi )
 

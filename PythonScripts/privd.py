@@ -18,6 +18,7 @@ import sys
 #  - Sync .ssh, .aws, .kube?
 # Check folders are there, create them otherwise
 # Check keys are there, create them otherwise
+# fusermount is not on Macos, use unmount instead
 
 # The folder where you store your keys for this password. TODO: remove .sysangel
 FOLDRKEYS = os.environ['HOME'] + "/.privd"

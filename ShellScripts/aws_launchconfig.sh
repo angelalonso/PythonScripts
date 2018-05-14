@@ -32,7 +32,7 @@ get_data() {
   get_asg
   echo "Getting data of current Launch Configuration"
   LC=$(AWS_PROFILE="${AWS_PROF}" aws autoscaling describe-auto-scaling-groups --auto-scaling-group-names $ASG --query 'AutoScalingGroups[*].LaunchConfigurationName' | jq -r -s '.[][]')
-  NEW_LC=$LC"_nopuppet_"$DATE
+  NEW_LC=$ASG"_nopuppet_"$DATE
   AMI=$(AWS_PROFILE="${AWS_PROF}" aws autoscaling describe-launch-configurations --launch-configuration-names $LC --query 'LaunchConfigurations[*].ImageId' | jq -r -s '.[][]')
   KEY=$(AWS_PROFILE="${AWS_PROF}" aws autoscaling describe-launch-configurations --launch-configuration-names $LC --query 'LaunchConfigurations[*].KeyName' | jq -r -s '.[][]')
   SG=$(AWS_PROFILE="${AWS_PROF}" aws autoscaling describe-launch-configurations --launch-configuration-names $LC --query 'LaunchConfigurations[*].SecurityGroups[0]' | jq -r -s '.[][]')
@@ -73,7 +73,7 @@ get_instance_id() {
 newsnapshot() {
   get_instance_id
   echo "Creating a new AMI using $ASG_INSTANCE instance"
-  NEW_AMI=$(AWS_PROFILE=europe aws ec2 create-image --no-reboot --description="scripted-image" --name="scripted-image-$ASG" --instance-id $ASG_INSTANCE | jq -r -s '.[][]')
+  NEW_AMI=$(AWS_PROFILE=europe aws ec2 create-image --no-reboot --description="scripted-image" --name="scripted-$ASG-$DATE" --instance-id $ASG_INSTANCE | jq -r -s '.[][]')
   echo "New AMI's id is $NEW_AMI"
   READY=""
   while [[ "$READY" != "available" ]]; do 
@@ -99,6 +99,10 @@ AWS_PROFILE="${AWS_PROF}" aws autoscaling create-launch-configuration \
   --block-device-mappings file://bdmap.json
 
 #  --no-associate-public-ip-address \
+echo "LAUNCH CONFIG READY:"
+echo "      - "$NEW_LC
+echo
+echo "Please update ASG "$ASG " accordingly"
 }
 
 show_help() {
@@ -124,7 +128,7 @@ if [[ "$2" != "" ]]; then
   ASG=$2
 fi
 if [[ "$3" != "" ]]; then
-  ASG_INSTANCE=$2
+  ASG_INSTANCE=$3
 fi
 get_data
 newsnapshot

@@ -4,31 +4,33 @@ countries=(ci dz gh ke ma ng rw sn tz ug tn)
 
 stg() {
 # STAGING
-AWSACCOUNT="xxxx-st"
-SOURCE_FLDR="live-yyy-staging.xxxxyyy.io"
-DEST_FLDR="xxxx-xxxx-yyy-stag"
-PATH_FLDR="yyy/xxxxxxxx/staging"
+AWSACCOUNT="jumia-st"
+SOURCE_FLDR="live-cms-staging.foodcms.io"
+#DEST_FLDR="jumia-food-cms-stag"
+DEST_FLDR="cms-assets-staging.food.jumia.com"
+PATH_FLDR="cms/foodpanda/staging"
 
 
 for cc in ${countries[@]}; do
   echo "##### SYNCING $cc"
   AWS_PROFILE="$AWSACCOUNT" \
-    aws s3 sync s3://$SOURCE_FLDR/${PATH_FLDR}/$cc  s3://$DEST_FLDR/${PATH_FLDR}/$cc
+    aws s3 sync s3://$SOURCE_FLDR/${PATH_FLDR}/$cc  s3://$DEST_FLDR/staging/$cc
 done
 }
 
 prod(){
 # PRODUCTION
-AWSACCOUNT="xxxx"
-SOURCE_FLDR="live-yyy-production.xxxxyyy.io"
-DEST_FLDR="xxxx-xxxx-yyy-prod"
-PATH_FLDR="yyy/xxxxxxxx/production"
+AWSACCOUNT="africa"
+SOURCE_FLDR="live-cms-production.foodcms.io"
+#DEST_FLDR="jumia-food-cms-prod"
+DEST_FLDR="cms-assets.food.jumia.com"
+PATH_FLDR="cms/foodpanda/production"
 
 
 for cc in ${countries[@]}; do
   echo "##### SYNCING $cc"
   AWS_PROFILE="$AWSACCOUNT" \
-    aws s3 sync s3://$SOURCE_FLDR/${PATH_FLDR}/$cc  s3://$DEST_FLDR/${PATH_FLDR}/$cc
+    aws s3 sync s3://$SOURCE_FLDR/${PATH_FLDR}/$cc  s3://$DEST_FLDR/production/$cc
 done
 }
 
