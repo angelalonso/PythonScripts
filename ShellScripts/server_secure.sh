@@ -9,8 +9,8 @@ update_system() {
 #  create new user, give it admin access, add public key
 add_user() {
   echo 
-  echo "Before we start, have a public SSH key ready at your local machine"
-  echo '- you can generate an SSH keypair with: ssh-keygen -f filename -t rsa -b 4096 -C "your_email@example.com"'
+  echo "Before we start, make sure you have your SSH keypair ready at your local machine"
+  echo '- you can generate one with: ssh-keygen -f filename -t rsa -b 4096 -C "your_email@example.com"'
   promptValue "Press Enter to continue"
 
   promptValue "Enter your user name"
@@ -26,7 +26,11 @@ add_user() {
   promptValue "Please look for it now and press <ENTER> when you are ready"
   vi /home/$USER/.ssh/authorized_keys 
   
+  echo "Next you have to add $USER to the sudo group"
+  promptValue "Press Enter to continue"
   vigr
+
+  echo "Next you have to 
 }
 #  generic function to ask for user interaction
 promptValue() {
