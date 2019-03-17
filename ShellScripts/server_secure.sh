@@ -10,7 +10,7 @@ update_system() {
 add_user() {
   echo 
   echo "Before we start, have a public SSH key ready at your local machine"
-  echo '" you can generate an SSH keypair with: ssh-keygen -f filename -t rsa -b 4096 -C "your_email@example.com"'
+  echo '- you can generate an SSH keypair with: ssh-keygen -f filename -t rsa -b 4096 -C "your_email@example.com"'
   promptValue "Press Enter to continue"
 
   promptValue "Enter your user name"
