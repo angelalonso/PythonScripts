@@ -29,8 +29,9 @@ add_user() {
   echo "Next you have to add $USER to the sudo group"
   promptValue "Press Enter to continue"
   vigr
+}
 
-  echo "Next you have to"
+ssh_tweak() {
 }
 #  generic function to ask for user interaction
 promptValue() {
