@@ -30,7 +30,7 @@ add_user() {
   promptValue "Press Enter to continue"
   vigr
 
-  echo "Next you have to 
+  echo "Next you have to"
 }
 #  generic function to ask for user interaction
 promptValue() {
