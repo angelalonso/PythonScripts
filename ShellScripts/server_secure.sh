@@ -4,7 +4,7 @@
 #  update, upgrade, install tools
 update_system() {
   sudo apt-get update && sudo apt-get upgrade
-  sudo apt-get install vim git
+  sudo apt-get install vim 
 }
 #  create new user, give it admin access, add public key
 add_user() {
@@ -32,3 +32,6 @@ promptValue() {
 #  avoid SSH as root
 
 # IPTables
+
+update_system
+add_user
