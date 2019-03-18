@@ -21,6 +21,8 @@ add_user() {
   chmod 600 /home/$USER/.ssh/authorized_keys 
   chown -R $USER:$USER /home/$USER 
 
+  passwd $USER
+
   echo "Next you will be asked to add your public Key"
   echo 
   promptValue "Please look for it now and press <ENTER> when you are ready"
@@ -35,7 +37,6 @@ add_user() {
 #  avoid SSH as root
 #  avoid SSH with password
 ssh_tweak() {
-  TODO: THIS LOCKS the user out of the system, check what went wrong
   sudo cp /etc/ssh/sshd_config /etc/ssh/sshd_config.orig
   promptValue "Enter your desired SSH PORT"
   SSHPORT=$val
@@ -47,6 +48,7 @@ ssh_tweak() {
   sudo sed -i 's/UsePAM yes/UsePAM no/g' /etc/ssh/sshd_config
   sudo systemctl restart sshd
 }
+
 #  generic function to ask for user interaction
 promptValue() {
  read -p "$1"": " val
@@ -56,4 +58,4 @@ promptValue() {
 
 update_system
 add_user
-#ssh_tweak
+ssh_tweak
