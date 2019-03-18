@@ -31,17 +31,28 @@ add_user() {
   vigr
 }
 
+#  change SSH Port
+#  avoid SSH as root
+#  avoid SSH with password
 ssh_tweak() {
+  # TODO: test this
+  promptValue "Enter your desired SSH PORT"
+  SSHPORT=$val
+  sudo sed -i .orig 's/#Port 22/Port '$SSHPORT'/g' /etc/ssh/sshd_config
+  # https://www.cyberciti.biz/faq/how-to-disable-ssh-password-login-on-linux/
+  sudo sed -i .bak 's/#PermitRootLogin .*/PermitRootLogin no/g' /etc/ssh/sshd_config
+  sudo sed -i .bak 's/#ChallengeResponseAuthentication .*/ChallengeResponseAuthentication no/g' /etc/ssh/sshd_config
+  sudo sed -i .bak 's/#PasswordAuthentication yes/PasswordAuthenticationno/g' /etc/ssh/sshd_config
+  sudo sed -i .bak 's/UsePAM yes/UsePAM no/g' /etc/ssh/sshd_config
+  #sudo systemctl restart sshd
 }
 #  generic function to ask for user interaction
 promptValue() {
  read -p "$1"": " val
 }
-#  change SSH Port
-#  avoid SSH with password
-#  avoid SSH as root
 
 # IPTables
 
 update_system
 add_user
+ssh_tweak
