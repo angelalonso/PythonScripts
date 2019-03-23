@@ -15,22 +15,23 @@ add_user() {
 
   promptValue "Enter your user name"
   USER=$val
-  useradd -m -s /bin/bash $USER 
-  mkdir /home/$USER/.ssh 
-  touch /home/$USER/.ssh/authorized_keys 
-  chmod 600 /home/$USER/.ssh/authorized_keys 
-  chown -R $USER:$USER /home/$USER 
+  sudo useradd -m -s /bin/bash $USER 
+  sudo mkdir /home/$USER/.ssh 
+  sudo touch /home/$USER/.ssh/authorized_keys 
+  sudo chmod 600 /home/$USER/.ssh/authorized_keys 
+  sudo chown -R $USER:$USER /home/$USER 
 
-  passwd $USER
+  sudo passwd $USER
 
   echo "Next you will be asked to add your public Key"
   echo 
   promptValue "Please look for it now and press <ENTER> when you are ready"
-  vi /home/$USER/.ssh/authorized_keys 
+  sudo vi /home/$USER/.ssh/authorized_keys 
   
   echo "Next you have to add $USER to the sudo group"
   promptValue "Press Enter to continue"
-  vigr
+  sudo vigr
+  sudo chown -R $USER. /home/$USER
 }
 
 #  change SSH Port
