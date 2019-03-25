@@ -1,0 +1,153 @@
+APP | VERSION | COUNTRY
+api | API.18.49.0 | it
+api | API.19.4.0 | at
+api | API.19.4.0 | ca
+api | API.19.4.0 | de
+api | API.19.4.0 | fi
+api | API.19.4.0 | no
+api | API.19.4.0 | se
+apihub | APIHUB_38.1 | 
+archimedes | ARCH.19.12.3 | at
+archimedes | ARCH.19.12.3 | bg
+archimedes | ARCH.19.12.3 | ca
+archimedes | ARCH.19.12.3 | de
+archimedes | ARCH.19.12.3 | fi
+archimedes | ARCH.19.12.3 | no
+archimedes | ARCH.19.12.3 | op
+archimedes | ARCH.19.12.3 | po
+archimedes | ARCH.19.12.3 | ro
+archimedes | ARCH.19.12.3 | se
+atlas | ATLAS.19.7.0 | at
+atlas | ATLAS.19.7.0 | bg
+atlas | ATLAS.19.7.0 | ca
+atlas | ATLAS.19.7.0 | de
+atlas | ATLAS.19.7.0 | fi
+atlas | ATLAS.19.7.0 | no
+atlas | ATLAS.19.7.0 | op
+atlas | ATLAS.19.7.0 | po
+atlas | ATLAS.19.7.0 | ro
+atlas | ATLAS.19.7.0 | se
+b2b | B2C.19.12.1 | at
+b2b | B2C.19.12.1 | bg
+b2b | B2C.19.12.1 | ca
+b2b | B2C.19.12.1 | de
+b2b | B2C.19.12.1 | fi
+b2b | B2C.19.12.1 | no
+b2b | B2C.19.12.1 | ro
+b2b | B2C.19.12.1 | se
+b2c | B2C.19.12.1 | at
+b2c | B2C.19.12.1 | bg
+b2c | B2C.19.12.1 | ca
+b2c | B2C.19.12.1 | de
+b2c | B2C.19.12.1 | fi
+b2c | B2C.19.12.1 | no
+b2c | B2C.19.12.1 | op
+b2c | B2C.19.12.1 | po
+b2c | B2C.19.12.1 | ro
+b2c | B2C.19.12.1 | se
+backend | SBE.19.11.5 | 
+battus | BATTUS.19.02.0 | 
+chef | CHEF.18.13.0 | 
+chef-dashboard | CHEF-DA.17.42.0 | 
+chef-dashboard-v1 | CHEF-DA.17.42.0 | 
+corp-notifier | CORPNOTIFIER.18.28.0 | 
+corpadmin | CORPADMIN.19.5.0 | at
+corpadmin | CORPADMIN.19.5.0 | bg
+corpadmin | CORPADMIN.19.5.0 | ca
+corpadmin | CORPADMIN.19.5.0 | de
+corpadmin | CORPADMIN.19.5.0 | fi
+corpadmin | CORPADMIN.19.5.0 | no
+corpadmin | CORPADMIN.19.5.0 | ro
+corpadmin | CORPADMIN.19.5.0 | se
+dh-disco-pandora-loader | DPLOADER.18.36.1 | de
+ditto | DITTO.19.7.0 | 
+event-ingester | INGESTER.19.8.0 | 
+expositor | EXPOSITOR.18.17.0 | at
+expositor | EXPOSITOR.18.17.0 | bg
+expositor | EXPOSITOR.18.17.0 | ca
+expositor | EXPOSITOR.18.17.0 | de
+expositor | EXPOSITOR.18.17.0 | fi
+expositor | EXPOSITOR.18.17.0 | no
+expositor | EXPOSITOR.18.17.0 | op
+expositor | EXPOSITOR.18.17.0 | po
+expositor | EXPOSITOR.18.17.0 | ro
+expositor | EXPOSITOR.18.17.0 | se
+global-api | GAPI.18.24.0 | 
+help-center-microfrontend | MICROFRONT.19.9.0 | 
+hermes | HERMES.18.43.0 | de
+internal-api | IAPI.18.39.0 | it
+internal-api | IAPI.19.10.2 | at
+internal-api | IAPI.19.10.2 | bg
+internal-api | IAPI.19.10.2 | de
+internal-api | IAPI.19.10.2 | fi
+internal-api | IAPI.19.10.2 | no
+internal-api | IAPI.19.10.2 | op
+internal-api | IAPI.19.10.2 | po
+internal-api | IAPI.19.10.2 | ro
+internal-api | IAPI.19.10.2 | se
+internal-api | IAPI.19.11.1 | ca
+isaura | eks-kops | 
+keymaker | KEYMAKER.19.4.0 | 
+kharon | KHARON.18.22.0 | op
+kharon | KHARON.19.8.0 | po
+klubke | KLUBKE.19.12.1 | 
+launch-darkly | 2.2.0 | 
+lingo | LNG.19.6.2 | 
+loyalty | LOYALTY.19.10.0 | 
+mcduck | MCD.19.7.1 | 
+medusa | MEDUSA.18.24.1 | op
+menu-importer | MENU.19.4.0 | de
+midas | MID.19.11.7 | 
+newsletter | NEWS.18.17.1 | at
+newsletter | NEWS.18.17.1 | bg
+newsletter | NEWS.18.17.1 | ca
+newsletter | NEWS.18.17.1 | de
+newsletter | NEWS.18.17.1 | fi
+newsletter | NEWS.18.17.1 | no
+newsletter | NEWS.18.17.1 | op
+newsletter | NEWS.18.17.1 | ro
+newsletter | NEWS.18.17.1 | se
+newsletter | filesystem-keys | po
+newton | NTN.19.11.0 | ca
+newton | NTN.19.8.0 | at
+newton | NTN.19.8.0 | bg
+newton | NTN.19.8.0 | de
+newton | NTN.19.8.0 | fi
+newton | NTN.19.8.0 | no
+newton | NTN.19.8.0 | op
+newton | NTN.19.8.0 | po
+newton | NTN.19.8.0 | ro
+newton | NTN.19.8.0 | se
+oauth2 |  | 
+order-tracker | OTA.19.8.0 | at
+order-tracker | OTA.19.8.0 | bg
+order-tracker | OTA.19.8.0 | ca
+order-tracker | OTA.19.8.0 | de
+order-tracker | OTA.19.8.0 | fi
+order-tracker | OTA.19.8.0 | no
+order-tracker | OTA.19.8.0 | op
+order-tracker | OTA.19.8.0 | po
+order-tracker | OTA.19.8.0 | ro
+order-tracker | OTA.19.8.0 | se
+pd-notifier | NOTIFIER.19.12.0 | 
+picasso | PICASSO.18.50.0 | 
+pusher | PUSHER.17.43.0 | 
+raf | RAF.19.9.0 | 
+redirects | REDIRECT.19.5.0 | 
+sapi | SAPI.19.10.0 | po
+sapi | SAPI.19.9.0 | bg
+sapi | SAPI.19.9.0 | op
+sapi | SAPI.19.9.0 | ro
+search-populator | hotfix-vendor-rating-vector-overwrite | 
+sherlock | SHERLOCK.19.11.2 | at
+sherlock | SHERLOCK.19.11.2 | bg
+sherlock | SHERLOCK.19.11.2 | ca
+sherlock | SHERLOCK.19.11.2 | de
+sherlock | SHERLOCK.19.11.2 | fi
+sherlock | SHERLOCK.19.11.2 | no
+sherlock | SHERLOCK.19.11.2 | op
+sherlock | SHERLOCK.19.11.2 | po
+sherlock | SHERLOCK.19.11.2 | ro
+sherlock | SHERLOCK.19.11.2 | se
+unn | UNN.19.11.0 | 
+watson | WATSON.19.12.2 | 
