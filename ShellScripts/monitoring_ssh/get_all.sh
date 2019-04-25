@@ -1,0 +1,66 @@
+#!/usr/bin/env bash
+LIST="./machine_list.txt"
+for i in $(cat $LIST); do
+        echo " #### "$i" #### "
+        ssh $i -p 22 "free -m -h; /opt/vc/bin/vcgencmd measure_temp; df -h; df -i"
+done
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+-- VISUAL --                                                                                                                                                                                                                                      59        5,77-84       All
